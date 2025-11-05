@@ -1,0 +1,333 @@
+<div id="quotePopup" class="quote-popup">
+  <div class="popup-content">
+  {% comment %}
+     <span class="close-popup"><img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Close_button.svg?v=1761333258" alt="" /></span>
+  {% endcomment %}
+    <form id="quoteForm" method="post" action="/contact#contact_form" class="quote-form">
+      <input type="hidden" name="form_type" value="contact">
+      <input type="hidden" name="utf8" value="✓">
+
+      <!-- ================= Step 1 ================= -->
+      <div class="form-step active" data-step="1">
+        <h2><span id="stetitle">Step 1</span> <br> Product & Surface Area</h2>
+        <p>To create a personalized quote, we need a few more details from you. Select the options you'd like to include in your quote below, such as our professional installation service for a perfectly laid floor.</p>
+        <div class="product-info" id="productPreview">
+          <img id="step1Img" src="{{ product.featured_image | img_url: '300x' }}" alt="{{ product.title }}" loading="lazy">
+          <h3>{{ product.title }}</h3>
+        </div>
+        <label for="surfaceAreaRange"><h4>How many square meters do you have?</h4></label>
+        <p class="note">Enter the surface area excluding cutting loss; we’ll automatically add cutting loss.</p>
+        <div class="slider-wrap">
+         
+          <input type="number" id="surfaceArea" name="surface_area" min="5" max="300" value="50" required> 
+          <span id="slideunit"> / </span>
+        {% comment %}
+            <span id="slideunit">m²</span>
+        {% endcomment %}
+           <input type="range" id="surfaceAreaRange" min="5" max="300" value="50" step="1">
+        </div>
+        <button type="button" class="next-btn">Continue to Next step <img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Arrow_1.svg?v=1761335532" alt="" /></button>
+      </div>
+
+   
+{% comment %}
+  {% assign is_laminaat = false %}
+      {% for collection in product.collections %}
+        {% if collection.handle == 'laminaat' %}
+          {% assign is_laminaat = true %}
+        {% endif %}
+      {% endfor %}
+
+
+<p>Current Quote Form URL: <span id="quoteFormUrl"></span></p>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // বর্তমান page URL
+    const fullUrl = window.location.href;
+
+    // Display করার জন্য span-এ inject
+    document.getElementById('quoteFormUrl').textContent = fullUrl;
+  });
+</script>
+{% endcomment %}
+
+
+
+{% comment %}
+   <!-- Step 2 & 3 ============================================================-->
+
+      <!-- Laminaat Step 2: Underlay -->
+      <div class="form-step laminaat-step" data-step="2" id="laminaatStep3  >
+        <div class="step-nav">
+          <button type="button" class="back-btn"><img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Chevron_e96c122e-984f-46b1-92f8-73cb826bdb9a.svg?v=1761333257" alt="" /></button>
+        </div>
+        <h2><span id="stetitle">Step 2</span> <br> Underlay</h2>
+        
+        <img id="step1Img" src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/WhatsApp_Image_2025-10-24_at_15.28.41.jpg?v=1761337582" alt="{{ product.title }}" class="step-img" loading="lazy">
+        <h3>What type of subfloor do you have?</h3>
+        <p>This helps us recommend the right underlay.</p>
+        <div class="option-group">
+          <label><input type="radio" name="laminaat_option" value="O Sand cement/concrete screed floor" required><span>O Sand cement/concrete screed floor</span></label>
+          <label><input type="radio" name="laminaat_option" value="Apartment (10 DB soundproofing required)
+" required><span>Apartment (10 DB soundproofing required)
+</span></label>
+          <label><input type="radio" name="laminaat_option" value="Wooden subfloor
+" required><span>Wooden subfloor
+</span></label>
+        </div>
+        <div class="step-nav">
+          <button type="button" class="next-btn">Continue to Next step <img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Arrow_1.svg?v=1761335532" alt="" /></button>
+        </div>
+      </div>
+
+      <!-- Laminaat Step 3: Installation -->
+      <div class="form-step laminaat-step" data-step="3" id="laminaatStep3">
+         <div class="step-nav">
+          <button type="button" class="back-btn"><img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Chevron_e96c122e-984f-46b1-92f8-73cb826bdb9a.svg?v=1761333257" alt="" /></button>
+        </div>
+        <h2><span id="stetitle">Step 3</span> <br> Installation Service</h2>
+        <img id="step1Img" src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/width_720.png?v=1760661304" alt="{{ product.title }}" class="step-img" loading="lazy">
+        <h3>Would you like to use our installation service?</h3>
+        <p>Our professionals ensure a perfectly laid floor — smooth, seamless, and fully compliant with regulations.</p>
+
+        <div class="option-group" id="step2Options">
+          <label><input type="radio" name="installation" value="Yes" required><span>Yes</span></label>
+          <label><input type="radio" name="installation" value="No" required><span>No</span></label>
+        </div>
+
+        {% if product.collections contains collections['pvc-plak'] %}
+          <div id="glueInfo" class="glue-note">
+            <p><img id="fimg" src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Kopie_van_Waterproof.svg?v=1754904388" alt="" loading="lazy" /> For glue-down PVC, a perfectly smooth surface is required. We can also handle this for you if needed.</p>
+          </div>
+        {% else %}
+          <div id="glueInfo" class="glue-note hidden">
+            <p></p>
+          </div>
+        {% endif %}
+        <div class="step-nav">
+                       <button type="button" class="next-btn">Continue to Next step <img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Arrow_1.svg?v=1761335532" alt="" loading="lazy"/></button>
+                     
+            </div>
+      </div>
+
+
+      <!---end================================================-->
+{% endcomment %}
+ 
+
+
+
+
+    
+      <!------- PVC Step 2: Installation -====================================-->
+      <div class="form-step pvc" data-step="2" id="pvcstep">
+         <div class="step-nav">
+          <button type="button" class="back-btn"><img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Chevron_e96c122e-984f-46b1-92f8-73cb826bdb9a.svg?v=1761333257" alt="" loading="lazy" /></button>
+        </div>
+        <h2><span id="stetitle">Step 2</span> <br> Installation Service</h2>
+        <img id="step1Img" src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/width_720.png?v=1760661304" alt="{{ product.title }}" class="step-img" loading="lazy">
+        <h3>Would you like to use our installation service?</h3>
+        <p>Our professionals ensure a perfectly laid floor — smooth, seamless, and fully compliant with regulations.</p>
+
+        <div class="option-group" id="step2Options">
+          <label><input type="radio" name="installation" value="Yes" required><span>Yes</span></label>
+          <label><input type="radio" name="installation" value="No" required><span>No</span></label>
+        </div>
+
+        {% if product.collections contains collections['pvc-plak'] %}
+          <div id="glueInfo" class="glue-note">
+            <p><img id="fimg" src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Kopie_van_Waterproof.svg?v=1754904388" alt="" loading="lazy"/> For glue-down PVC, a perfectly smooth surface is required. We can also handle this for you if needed.</p>
+          </div>
+        {% else %}
+          <div id="glueInfo" class="glue-note hidden">
+            <p></p>
+          </div>
+        {% endif %}
+        <div class="step-nav">
+                       <button type="button" class="next-btn">Continue to Next step <img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Arrow_1.svg?v=1761335532" alt="" /></button>
+                     
+            </div>
+      </div>
+
+      <!-- PVC Step 3: Leveling -->
+      <div class="form-step pvc" data-step="3" id="pvcstep" >
+         <div class="step-nav">
+          <button type="button" class="back-btn"><img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Chevron_e96c122e-984f-46b1-92f8-73cb826bdb9a.svg?v=1761333257" alt="" /></button>
+        </div>
+        <h2><span id="stetitle">Step 3</span><br> Leveling</h2>
+        <img id="step1Img" src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/width_899.png?v=1760661244" alt="{{ product.title }}" class="step-img" loading="lazy">
+        <h3>Would you like to use our leveling service?</h3>
+        <p>PVC-Glue requires a perfectly smooth surface. We perform professional leveling for a flawless finish.</p>
+        <div class="option-group" id="levelingOptions">
+          <label><input type="radio" name="leveling" value="Yes" id="levelYes" required><span>Yes</span></label>
+          <div id="levelingTypes" class="hidden fade-in">
+            <h4>What kind of surface is it?:</h4>
+            <p>PVC-Glue requires a perfectly smooth surface. We perform professional leveling for a flawless finish.</p>
+            <select name="floor_type" required>
+              <option value="">Select Floor Type</option>
+              <option>Sand cement/concrete screed floor</option>
+              <option>Existing tiled floor</option>
+              <option>Anhydrite screed floor</option>
+              <option>Wooden supporting floor</option>
+            </select>
+          </div>
+          <label><input type="radio" name="leveling" value="No" id="levelNo"><span>No</span></label>
+        </div>
+        <div class="step-nav">
+          <button type="button" class="next-btn">Continue to Next step <img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Arrow_1.svg?v=1761335532" alt="" /></button>
+        </div>
+      </div>
+ 
+
+
+   <!-----End--------====================================-->   
+
+      <!-- ================= Step 4-7 (Original content) ================= -->
+      <div class="form-step" data-step="4">
+         <div class="step-nav">
+          <button type="button" class="back-btn"><img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Chevron_e96c122e-984f-46b1-92f8-73cb826bdb9a.svg?v=1761333257" alt="" /></button>
+        </div>
+                   <h2><span id="stetitle">Step 4</span> <br> Skirting Boards</h2>
+                    
+            <h3>Which skirting board do you have in mind?</h3>
+                    
+            <p>Neat finish with skirting boards in the desired style.</p>
+                    
+            <div class="scroll-area" id="skirtingProductList">
+                                   <label id="dontlabel" class="skirting-label">
+                           <input type="radio" name="skirting" value="I don't need skirting boards — I will provide this at a later time" required>
+                           <span>I don't need skirting boards — I will provide this at a later time</span>
+                         </label>
+                                   {% assign shown_products = "" %}
+                         {% for collection in collections %}
+                           {% for product in collection.products %}
+                             {% if product.tags contains "service" %}
+                               {% unless shown_products contains product.handle %}
+                                 <label class="skirting-label">
+                                   <input type="radio" name="skirting" value="{{ product.title }}" data-product-handle="{{ product.handle }}" required>
+                                   <img src="{{ product.featured_image | img_url: '100x' }}" alt="{{ product.title }}" loading="lazy">
+                                   <span>{{ product.title }}</span>
+                                 </label>
+                                 {% assign shown_products = shown_products | append: product.handle | append: "," %}
+                               {% endunless %}
+                             {% endif %}
+                           {% endfor %}
+                         {% endfor %}
+                       
+            </div>
+                    
+            <div class="step-nav">
+                         <button type="button" class="next-btn">Continue to Next step <img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Arrow_1.svg?v=1761335532" alt="" /></button>
+                       
+            </div>
+      </div>
+      <div class="form-step" data-step="5">
+         <div class="step-nav">
+          <button type="button" class="back-btn"><img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Chevron_e96c122e-984f-46b1-92f8-73cb826bdb9a.svg?v=1761333257" alt="" /></button>
+        </div>
+                   <h2><span id="stetitle">Step 5</span> <br> Skirting Boards</h2>
+                    <img id="step1Img" src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/width_900.png?v=1760904431" alt="Skirting Installation" class="step-img" loading="lazy">
+                    
+            <h3 style="display:none" id="skirtingSelectionSummary"></h3>
+                    
+            <h4>Do we need to install the skirting boards?</h4>
+                    
+            <p>We’ll install matching skirting boards for a neat and professional finish.</p>
+                    
+            <div class="option-group" id="skirtingChildOptions">
+                         <label><input type="radio" name="skirting_install_option" value="No, I will install it myself (delivery only)" required><span>No, I will install it myself (delivery only)</span></label>
+                         <label><input type="radio" name="skirting_install_option" value="Assemble, miter all corners and seal the top and bottom – Best result! €19.99 per m¹" required><span>Assemble, miter all corners and seal the top and bottom – Best result! €19.99 per m¹</span></label>
+                         <label><input type="radio" name="skirting_install_option" value="Assemble, miter all corners and seal the top – €13.99 per m¹" required><span>Assemble, miter all corners and seal the top – €13.99 per m¹</span></label>
+                         <label><input type="radio" name="skirting_install_option" value="Mounting and sealing the top (inner corner at right angles, outer corner at an angle) – Most popular! €11.99 per m¹" required><span>Mounting and sealing the top (inner corner at right angles, outer corner at an angle) – Most popular! €11.99 per m¹</span></label>
+                         <label><input type="radio" name="skirting_install_option" value="Single mounting (inner corner square, outer corner mitered) – €6.49 per m¹" required><span>Single mounting (inner corner square, outer corner mitered) – €6.49 per m¹</span></label>
+                       
+            </div>
+                    
+            <div class="step-nav">
+                         <button type="button" class="next-btn">Continue to Next step <img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Arrow_1.svg?v=1761335532" alt="" /></button>
+                       
+            </div>
+      </div>
+      <div class="form-step" data-step="6">
+        <!-- Overview -->
+         <div class="step-nav">
+          <button type="button" class="back-btn"><img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Chevron_e96c122e-984f-46b1-92f8-73cb826bdb9a.svg?v=1761333257" alt="" /></button>
+        </div>
+        <h2><span id="stetitle">Step 6</span> <br> Overview</h2>
+        <div class="overimglogo">
+              <img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/width_800.png?v=1760662211" alt="{{ product.title }}" class="step-img" loading="lazy">
+                       
+          </div>
+                    
+            <h3>Overview</h3>
+                     
+            <p>Please review your selected products and options before sending your request. You can still make changes if needed.</p>
+        <div id="overview"></div>
+        <div class="step-nav">
+          <button type="button" class="next-btn">Continue to Next step <img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Arrow_1.svg?v=1761335532" alt="" /></button>
+        </div>
+      </div>
+      <div class="form-step" data-step="7">
+         <div class="step-nav">
+          <button type="button" class="back-btn"><img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/Chevron_e96c122e-984f-46b1-92f8-73cb826bdb9a.svg?v=1761333257" alt="" /></button>
+        </div>
+                   <h2>Step 7 <br> Personal Info</h2>
+                     
+            <div class="overimglogo">
+                          <img src="https://cdn.shopify.com/s/files/1/0909/1796/2071/files/width_800.png?v=1760662211" alt="{{ product.title }}" class="step-img" loading="lazy">
+                       
+            </div>
+                    
+            <h3>Where should we send the quotation?</h3>
+                     
+            <p>Super fast and completely without obligation in your mailbox!</p>
+                     
+            <h4>Personal information</h4>
+                    <input type="text" name="contact[first_name]" placeholder="First Name" required>
+                    <input type="text" name="contact[last_name]" placeholder="Last Name" required>
+                    <input type="email" name="contact[email]" placeholder="Email Address" required>
+                    <input type="text" name="contact[phone]" placeholder="Phone">
+                    
+            <h4>Adress information</h4>
+              
+                    <input type="text" name="contact[zip]" placeholder="Postal Code" required>
+                     <input type="text" name="contact[house_number]" placeholder="House number" required>
+                      <input type="text" name="contact[resident_place]" placeholder="Place of residence" required>
+                    <input type="text" name="contact[street_name]" placeholder="Street name" required>
+                    
+            <textarea name="contact[body]" placeholder="Comments(Anything else we should know?)"></textarea>
+                    
+            <div class="step-nav">
+                         <button type="submit" class="submit-btn">Receive Your Price</button>
+                       
+            </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ================= Success Popup ================= -->
+<div id="successPopup" class="success-popup">
+  <div class="success-content">
+
+      <span class="close-success">&times;</span>
+    <div class="success-icon">✔</div>
+    <h2>Request successful!</h2>
+    <p>Your request has been received. Our flooring experts are reviewing your details and will prepare your personalized quote shortly.</p>
+    <div class="success-buttons">
+      <a href="/" class="btn-primary">Back to homepage</a>
+      <span>Or</span>
+      <a href="/collections/all" class="btn-secondary">Browse more floors</a>
+    </div>
+  </div>
+</div>
+
+<!-- CSS + JS: old logic maintained, new improvements included -->
+
+<link rel="stylesheet" href="{{ 'quote-form.css' | asset_url }}">
+<script src="{{ 'quote-form.js' | asset_url }}" defer="defer"></script>
+
+
+
+
